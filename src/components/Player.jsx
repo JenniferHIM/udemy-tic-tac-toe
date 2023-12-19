@@ -4,13 +4,15 @@ export default function Player({ name, symbol }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function hadleEditClick() {
-    setIsEditing(true);
+    setIsEditing((editing) => !editing);
   }
 
   let playerName = <span className="player-name">{name}</span>;
+  // let btnCaption = "Edit";
 
   if (isEditing) {
-    return <input type="text" required />;
+    playerName = <input type="text" required value={name} />;
+    // btnCaption = "Save";
   }
 
   return (
@@ -18,7 +20,7 @@ export default function Player({ name, symbol }) {
       <span className="player">
         {playerName}
         <span id="player-symbol">{symbol}</span>
-        <button onClick={hadleEditClick}>Edit</button>
+        <button onClick={hadleEditClick}>{isEditing ? "Save" : "Edit"}</button>
       </span>
     </li>
   );
